@@ -11,7 +11,6 @@ create table users
     name     varchar(255),
     password varchar(255),
     role     varchar(255),
-    bucket_id int8,
     primary key (id)
 );
 -- BUCKET
@@ -30,10 +29,6 @@ create table buckets
 alter table if exists buckets
     add constraint buckets_fk_user
     foreign key (user_id) references users;
-
-alter table if exists users
-    add constraint users_fk_user
-        foreign key (bucket_id) references buckets;
 
 -- CATEGORY
 drop sequence if exists category_seq;
@@ -54,7 +49,7 @@ drop table if exists products cascade;
 create table products
 (
     id    int8 not null,
-    price float8,
+    price numeric(19, 2),
     title varchar(255),
     primary key (id)
 );
@@ -100,7 +95,7 @@ drop table if exists orders cascade;
 create table orders
 (
     id      int8 not null,
-    address varchar(255),
+    adress varchar(255),
     updated timestamp,
     created timestamp,
     status  varchar(255),
